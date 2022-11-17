@@ -7,9 +7,9 @@ class Node {
 }
 
 class Tree {
-    constructor(array, root) {
+    constructor(array) {
         this.array = array
-        this.root = root
+        this.root = this.buildTree(array)
     }
 
     buildTree(array) {
@@ -30,7 +30,7 @@ class Tree {
     }
 }
 
-let tree = new Tree
+let tree = new Tree([1,2,3,4,5,6,7])
 
 console.log(tree.buildTree([1,2,3,4,5,6,7]))
 
