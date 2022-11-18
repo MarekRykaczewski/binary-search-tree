@@ -1,8 +1,8 @@
 class Node {
-    constructor(data, left, right) {
+    constructor(data) {
         this.data = data
-        this.left = left
-        this.right = right
+        this.left = null
+        this.right = null
     }
 }
 
@@ -28,6 +28,24 @@ class Tree {
 
         return node
     }
+
+    insert(value, pointer = this.root) {
+
+        if (pointer === null) {
+            return new Node(value);
+        }
+        if (pointer.value === value) {
+            return;
+        } 
+
+        if (pointer.value < value) {
+            pointer.left = this.insert(value, pointer.left)
+        } else {
+            pointer.right = this.insert(value, pointer.right)
+        }
+        return pointer
+
+    }
 }
 
 let tree = new Tree([1,2,3,4,5,6,7])
@@ -44,6 +62,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     }
   }
 
-prettyPrint(tree.buildTree([1,2,3,4,5,6,7]))
 
 
