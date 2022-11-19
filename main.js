@@ -46,6 +46,47 @@ class Tree {
         return pointer
 
     }
+
+    deleteRec(value, root = this.root) {
+    /* Base Case: If the tree is empty */
+        if (root == null)
+            return root;
+   
+        /* Otherwise, recur down the tree */
+        if (value < root.data)
+            root.left = this.deleteRec(value, root.left);
+        else if (value > root.data)
+            root.right = this.deleteRec(value, root.right);
+   
+        // if key is same as root's
+        // key, then This is the
+        // node to be deleted
+        else {
+            // node with only one child or no child
+            if (root.left == null)
+                return root.right;
+            else if (root.right == null)
+                return root.left;
+   
+            // node with two children: Get the inorder
+            // successor (smallest in the right subtree)
+            root.data = this.minValue(root.right);
+   
+            // Delete the inorder successor
+            root.right = this.deleteRec(root.data, root.right);
+        }
+   
+        return root;
+    }
+
+    minValue(root) {
+        let min = root.data;
+        while (root.left != null) {
+          min = root.left.data;
+          root = root.left;
+        }
+        return min;
+    }
 }
 
 let tree = new Tree([1,2,3,5,6,7,8])
@@ -67,8 +108,16 @@ const util = require("util")
 // prettyPrint(tree.buildTree([1,2,3,4,5,6,7]))
 // tree.insert(8)
 // console.log(util.inspect(tree.insert(4), false, null, true /* enable colors */))
-tree.insert(4)
+// tree.insert(4)
 
 prettyPrint(tree.root)
+
+console.log(util.inspect(tree.deleteRec(5), false, null, true /* enable colors */))
+
+
+
+
+prettyPrint(tree.root)
+
 
 
