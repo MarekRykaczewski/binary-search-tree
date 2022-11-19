@@ -87,11 +87,20 @@ class Tree {
         }
         return min;
     }
+
+    find(value, root = this.root) {
+        if (root === null || root.data === value)
+            return root;
+
+        if (root.data < value) {
+            return root.right = this.find(value, root.right)
+        } else {
+            return root.left = this.find(value, root.left)
+        }
+    }
 }
 
 let tree = new Tree([1,2,3,5,6,7,8])
-
-// console.log(tree.buildTree([1,2,3,4,5,6,7]))
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
     if (node.right !== null) {
@@ -112,12 +121,6 @@ const util = require("util")
 
 prettyPrint(tree.root)
 
-console.log(util.inspect(tree.deleteRec(5), false, null, true /* enable colors */))
-
-
-
-
-prettyPrint(tree.root)
-
-
+console.log(tree.find(2))
+tree.find(2)
 
