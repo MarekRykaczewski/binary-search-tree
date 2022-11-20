@@ -12,6 +12,7 @@ class Tree {
         this.root = this.buildTree(array)
         this.inorderData = [];
         this.preorderData = [];
+        this.postorderData = [];
     }
 
     buildTree(array) {
@@ -155,6 +156,24 @@ class Tree {
 
         return this.preorderData
     }
+
+    postorder(root) {
+        if (root == null) return
+
+        if (root.left !== null) {
+            this.postorder(root.left)
+        }
+        
+        if (root.right !== null) {
+            this.postorder(root.right)
+        }
+
+        if (root.data !== undefined) {
+            this.postorderData.push(root.data)
+        }
+
+        return this.postorderData
+    }
 }
 
 let tree = new Tree([1,2,3,5,6,7,8])
@@ -183,4 +202,5 @@ prettyPrint(tree.root)
 // tree.find(2)
 // console.log(tree.levelOrder(tree.root))
 // console.log(tree.inorder(tree.root))
-console.log(tree.preorder(tree.root))
+// console.log(tree.preorder(tree.root))
+console.log(tree.postorder(tree.root))
