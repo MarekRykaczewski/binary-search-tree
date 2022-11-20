@@ -198,6 +198,30 @@ class Tree {
           return true;
         }
       }
+
+      traverse(root, array) {
+        if (array !== undefined) array.push(root.data);
+        if (root.left !== null) {
+          this.traverse(root.left, array);
+        }
+    
+        if (root.right !== null) {
+          this.traverse(root.right, array);
+        }
+        return array;
+      }
+
+      rebalance() {
+        if (this.isBalanced(this.root)) return this.root;
+    
+        let rebalancedNewTreeArray = [];
+        rebalancedNewTreeArray = this.traverse(this.root, rebalancedNewTreeArray);
+    
+        let balancedTree = new Tree(rebalancedNewTreeArray);
+    
+        return balancedTree.root;
+      }
+    
 }
 
 let tree = new Tree([1,2,3,5,6,7,8])
