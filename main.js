@@ -174,6 +174,17 @@ class Tree {
 
         return this.postorderData
     }
+
+    height(root) {
+        if (root == null) {
+          return -1;
+        } else {
+          let left = this.height(root.left);
+          let right = this.height(root.right);
+    
+          return Math.max(left, right) + 1;
+        }
+      }
 }
 
 let tree = new Tree([1,2,3,5,6,7,8])
@@ -203,4 +214,5 @@ prettyPrint(tree.root)
 // console.log(tree.levelOrder(tree.root))
 // console.log(tree.inorder(tree.root))
 // console.log(tree.preorder(tree.root))
-console.log(tree.postorder(tree.root))
+// console.log(tree.postorder(tree.root))
+console.log(tree.height(tree.root))
