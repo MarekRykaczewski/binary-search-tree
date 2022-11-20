@@ -185,6 +185,19 @@ class Tree {
           return Math.max(left, right) + 1;
         }
       }
+
+      isBalanced(root) {
+        if (root == null) return false;
+    
+        let leftHalf = root.left;
+        let rightHalf = root.right;
+    
+        if (Math.abs(this.height(leftHalf) - this.height(rightHalf)) > 1) {
+          return false;
+        } else {
+          return true;
+        }
+      }
 }
 
 let tree = new Tree([1,2,3,5,6,7,8])
@@ -215,4 +228,4 @@ prettyPrint(tree.root)
 // console.log(tree.inorder(tree.root))
 // console.log(tree.preorder(tree.root))
 // console.log(tree.postorder(tree.root))
-console.log(tree.height(tree.root))
+console.log(tree.isBalanced(tree.root))
