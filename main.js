@@ -98,6 +98,25 @@ class Tree {
             return root.left = this.find(value, root.left)
         }
     }
+
+    levelOrder(root) {
+        let queue = []
+        let output = []
+
+        if (root == null) return
+
+        queue.push(root)
+
+        while (queue.length > 0) {
+            let current = queue.shift(root)
+            output.push(current.data)
+
+            if (current.left !== null) queue.push(current.left)
+            if (current.left !== null) queue.push(current.right)
+        }
+
+        return output
+    }
 }
 
 let tree = new Tree([1,2,3,5,6,7,8])
@@ -113,6 +132,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 
 const util = require("util")
+const { resourceLimits } = require("worker_threads")
 
 // prettyPrint(tree.buildTree([1,2,3,4,5,6,7]))
 // tree.insert(8)
@@ -121,6 +141,7 @@ const util = require("util")
 
 prettyPrint(tree.root)
 
-console.log(tree.find(2))
-tree.find(2)
+// console.log(tree.find(2))
+// tree.find(2)
+console.log(tree.levelOrder(tree.root))
 
